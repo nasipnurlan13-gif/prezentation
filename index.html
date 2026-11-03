@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кемчонтой | Тоголок Молдо</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#09130f;
+ --panel:#11251b;
+ --green:#315c3d;
+ --gold:#d8b56e;
+ --white:#f5f0e5;
+ --muted:#a9b5a8;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--white);
+ font-family:Manrope,sans-serif;overflow:hidden;
+}
+.deck{
+ width:100%;height:100vh;position:relative;overflow:hidden;
+ background:
+ radial-gradient(ellipse at 85% 20%,#315c3d44,transparent 40%),
+ radial-gradient(ellipse at 5% 95%,#b18b3d18,transparent 40%),
+ #09130f;
+}
+.deck:before{
+ content:"";position:absolute;inset:12px;
+ border:1px solid #d8b56e40;z-index:10;pointer-events:none;
+}
+.slide{
+ position:absolute;inset:0;padding:65px 9% 100px;
+ display:flex;flex-direction:column;justify-content:center;
+ opacity:0;visibility:hidden;
+ transform:translateY(35px) scale(.98);
+ transition:opacity .7s ease,transform .7s ease,visibility .7s;
+ overflow-y:auto;
+}
+.slide.active{
+ opacity:1;visibility:visible;transform:translateY(0) scale(1);
+}
+.slide.active .reveal{
+ animation:reveal .8s both;
+}
+.slide.active .delay1{animation-delay:.15s}
+.slide.active .delay2{animation-delay:.3s}
+.slide.active .delay3{animation-delay:.45s}
+.slide.active .delay4{animation-delay:.6s}
+@keyframes reveal{
+ from{opacity:0;transform:translateY(35px)}
+ to{opacity:1;transform:translateY(0)}
+}
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-13px)}
+}
+@keyframes pulse{
+ 0%,100%{box-shadow:0 0 15px #d8b56e10}
+ 50%{box-shadow:0 0 35px #d8b56e30}
+}
+@keyframes spin{
+ to{transform:rotate(360deg)}
+}
+@keyframes shine{
+ from{background-position:-200%}
+ to{background-position:200%}
+}
+@keyframes zoom{
+ from{transform:scale(1.12)}
+ to{transform:scale(1)}
+}
+h1,h2,h3{
+ font-family:'Playfair Display',serif;margin:0;
+}
+h1{
+ font-size:clamp(65px,10vw,130px);
+ line-height:.95;color:var(--white);
+}
+h2{
+ font-size:clamp(38px,5.5vw,68px);
+ margin-bottom:25px;
+}
+h3{font-size:26px;color:var(--gold);margin-bottom:12px}
+p{color:#c5d0c5;font-size:16px;line-height:1.8}
+.gold{color:var(--gold)}
+.eyebrow{
+ color:var(--gold);font-size:12px;
+ letter-spacing:5px;text-transform:uppercase;
+ margin-bottom:23px;
+}
+.topline{
+ display:flex;justify-content:space-between;
+ align-items:center;margin-bottom:25px;
+}
+.tag{
+ display:inline-block;border:1px solid #d8b56e80;
+ color:var(--gold);padding:8px 15px;
+ font-size:11px;letter-spacing:2px;
+}
+.hero{
+ display:grid;grid-template-columns:1.1fr .9fr;
+ align-items:center;gap:55px;
+}
+.heroimg{
+ width:100%;height:480px;object-fit:cover;
+ border-radius:4px 70px 4px 4px;
+ border:1px solid #d8b56e77;
+ box-shadow:20px 20px 0 #315c3d44;
+ animation:float 6s ease-in-out infinite;
+}
+.subtitle{
+ font-size:18px;letter-spacing:3px;
+ color:var(--gold);margin-top:22px;
+}
+.author{
+ margin-top:45px;color:var(--muted);font-size:12px;
+ letter-spacing:2px;
+}
+.decor{
+ position:absolute;width:300px;height:300px;
+ border:1px solid #d8b56e13;border-radius:50%;
+ right:-130px;top:-120px;
+ box-shadow:0 0 0 35px #d8b56e08,0 0 0 70px #d8b56e05;
+ pointer-events:none;
+}
+.layout{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:28px;align-items:center;
+}
+.cards{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.card{
+ padding:24px;background:linear-gradient(140deg,#183526,#102018);
+ border:1px solid #d8b56e2c;border-radius:5px;
+ min-height:205px;transition:.4s;
+}
+.card:hover{
+ transform:translateY(-9px);
+ border-color:var(--gold);
+ background:linear-gradient(140deg,#244832,#11251b);
+}
+.card .num{
+ font-family:'Playfair Display';font-size:46px;
+ color:var(--gold);margin-bottom:15px;
+}
+.card p{font-size:14px}
+.photo{
+ width:100%;height:300px;object-fit:cover;
+ border-radius:5px 45px 5px 5px;
+ border:1px solid #d8b56e55;
+ transition:transform .6s;
+}
+.photo:hover{transform:scale(1.025)}
+.caption{
+ font-size:11px;color:#8eaa94;
+ letter-spacing:2px;margin-top:10px;
+}
+.textbox{
+ padding:27px;background:#14271c;
+ border-left:3px solid var(--gold);
+ border-radius:0 8px 8px 0;
+}
+.bigquote{
+ font-family:'Playfair Display';font-size:clamp(25px,3vw,38px);
+ line-height:1.45;color:#e9d6a7;
+}
+.timeline{
+ display:grid;grid-template-columns:50px 1fr;
+ gap:15px;margin:20px 0;
+}
+.timeline span{
+ font-family:'Playfair Display';font-size:30px;color:var(--gold);
+}
+.timeline p{margin:0}
+.character{
+ display:flex;gap:17px;align-items:flex-start;
+ margin:18px 0;padding:15px;
+ border-bottom:1px solid #d8b56e25;
+}
+.character .symbol{
+ width:48px;height:48px;flex-shrink:0;
+ border:1px solid var(--gold);border-radius:50%;
+ display:grid;place-items:center;color:var(--gold);
+ font-size:22px;
+}
+.character p{margin:4px 0;font-size:14px}
+.final{
+ text-align:center;max-width:850px;margin:auto;
+}
+.final h2{font-size:clamp(55px,8vw,95px)}
+.final p{max-width:680px;margin:22px auto}
+.final .thanks{
+ font-family:'Playfair Display';font-size:32px;color:var(--gold);
+ margin-top:35px;
+}
+.nav{
+ position:absolute;bottom:25px;left:9%;right:9%;
+ display:flex;align-items:center;gap:18px;z-index:20;
+}
+.counter{font-size:12px;color:var(--gold);white-space:nowrap}
+.track{height:3px;flex:1;background:#314538}
+.fill{
+ height:100%;width:14.28%;background:var(--gold);
+ transition:width .5s;
+}
+.controls{display:flex;gap:8px}
+button{
+ background:#193325;border:1px solid #d8b56e77;
+ color:var(--gold);padding:11px 18px;
+ cursor:pointer;font-size:17px;transition:.3s;
+}
+button:hover{background:var(--gold);color:#09130f}
+.hint{
+ position:absolute;right:9%;top:32px;
+ color:#849889;font-size:10px;letter-spacing:2px;
+}
+.glow{
+ position:absolute;inset:auto auto 5% 40%;
+ width:200px;height:200px;border-radius:50%;
+ background:#b48c3b12;filter:blur(60px);
+ pointer-events:none;
+}
+@media(max-width:750px){
+ .slide{padding:55px 8% 100px}
+ .hero,.layout{grid-template-columns:1fr;gap:22px}
+ .heroimg{height:230px;max-width:400px}
+ .cards{grid-template-columns:1fr}
+ .card{min-height:auto;padding:18px}
+ .card .num{font-size:32px;margin:0}
+ h1{font-size:75px}
+ h2{font-size:43px}
+ h3{font-size:22px}
+ p{font-size:14px}
+ .photo{height:210px}
+ .hint{display:none}
+ .nav{left:8%;right:8%;bottom:20px}
+ .textbox{padding:18px}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+<div class="decor"></div>
+<div class="glow"></div>
+
+<!-- 1 -->
+<section class="slide active">
+ <div class="topline">
+  <span class="eyebrow">КЫРГЫЗ АДАБИЯТЫ</span>
+  <span class="tag">01 / 07</span>
+ </div>
+ <div class="hero">
+  <div>
+   <div class="eyebrow reveal">Тоголок Молдонун чыгармасы</div>
+   <h1 class="reveal delay1">КЕМ<br><span class="gold">ЧОНТОЙ</span></h1>
+   <div class="subtitle reveal delay2">САТИРАЛЫК ПОЭМА</div>
+   <p class="reveal delay3">Адамдын мүнөзүн, жүрүм-турумун жана терс сапаттарын күлкү аркылуу көрсөткөн чыгарма.</p>
+   <div class="author reveal delay4">ДАЯРДАГАН: __________________</div>
+  </div>
+  <div class="reveal delay2">
+   <img class="heroimg" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900" alt="Кыргызстандын тоолору">
+   <div class="caption">КЫРГЫЗ ЖЕРИ · АДАБИЙ МУРАС</div>
+  </div>
+ </div>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+ <div class="topline">
+  <span class="eyebrow">АВТОР ЖӨНҮНДӨ</span>
+  <span class="tag">02 / 07</span>
+ </div>
+ <h2 class="reveal">Тоголок Молдо <span class="gold">ким?</span></h2>
+ <div class="layout">
+  <div class="reveal delay1">
+   <p>Тоголок Молдо — кыргыз элинин белгилүү акыны жана агартуучусу. Анын чыныгы аты — Байымбет Абдрахманов.</p>
+   <div class="timeline">
+    <span>1860</span>
+    <p>Нарын жергесиндеги Куртка айылында төрөлгөн.</p>
+   </div>
+   <div class="timeline">
+    <span>1942</span>
+    <p>Кыргыз адабиятына чоң мурас калтырып, дүйнөдөн кайткан.</p>
+   </div>
+   <div class="textbox">
+    <h3>Эмнеси менен белгилүү?</h3>
+    <p>Элдин турмушун, адилетсиздикти жана адам мүнөзүндөгү кемчиликтерди чыгармаларында чагылдырган.</p>
+   </div>
+  </div>
+  <div class="reveal delay2">
+   <img class="photo" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900" alt="Тоолуу пейзаж">
+   <div class="caption">АКЫНДЫН ӨМҮРҮ ӨТКӨН КЫРГЫЗ ЖЕРИ</div>
+  </div>
+ </div>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+ <div class="topline">
+  <span class="eyebrow">ЧЫГАРМАНЫН МААНИСИ</span>
+  <span class="tag">03 / 07</span>
+ </div>
+ <h2 class="reveal">«Кемчонтой» <span class="gold">эмне жөнүндө?</span></h2>
+ <p class="reveal delay1">Бул чыгарма элдик жомоктун негизинде жазылган сатиралык поэма. Автор адамдагы акылсыздыкты, жалкоолукту жана туура эмес жүрүм-турумду сынга алат.</p>
+ <div class="cards">
+  <div class="card reveal delay1">
+   <div class="num">01</div>
+   <h3>Жанры</h3>
+   <p>Сатиралык поэма. Сатира — кемчиликтерди күлкү аркылуу сындоо.</p>
+  </div>
+  <div class="card reveal delay2">
+   <div class="num">02</div>
+   <h3>Башкы каарман</h3>
+   <p>Кемчонтой — өзүнүн акылсыз жана күлкүлүү жоруктары менен айырмаланган каарман.</p>
+  </div>
+  <div class="card reveal delay3">
+   <div class="num">03</div>
+   <h3>Максаты</h3>
+   <p>Адамдарды жаман сапаттардан алыс болууга жана туура жашоого үндөө.</p>
+  </div>
+ </div>
+ <div class="textbox reveal delay4" style="margin-top:23px">
+  <p class="bigquote">«Күлкү аркылуу кемчиликти көрсөтүү — сатиранын негизги күчү».</p>
+ </div>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+ <div class="topline">
+  <span class="eyebrow">ОКУЯНЫН ӨНҮГҮШҮ</span>
+  <span class="tag">04 / 07</span>
+ </div>
+ <h2 class="reveal">Поэманын <span class="gold">мазмуну</span></h2>
+ <div class="layout">
+  <div class="reveal delay1">
+   <div class="timeline">
+    <span>01</span>
+    <p>Кемчонтойдун атасы казы болгон. Атасы өлгөндөн кийин ал калган мал-мүлкүн туура пайдалана албай чачып жиберет.</p>
+   </div>
+   <div class="timeline">
+    <span>02</span>
+    <p>Анын акылсыз жоруктары жана туура эмес сөздөрү элге күлкү болот.</p>
+   </div>
+   <div class="timeline">
+    <span>03</span>
+    <p>Энеси аны оң жолго салуу үчүн Багдагүлгө үйлөндүрөт.</p>
+   </div>
+   <div class="timeline">
+    <span>04</span>
+    <p>Багдагүл Кемчонтойдун кемчиликтерин оңдоого аракет кылат, бирок анын жоруктары улана берет.</p>
+   </div>
+  </div>
+  <div class="reveal delay2">
+   <img class="photo" style="height:370px" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900" alt="Айылдагы жашоо">
+   <div class="caption">ЭЛДИК ТУРМУШТАН КӨРҮНҮШ</div>
+  </div>
+ </div>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+ <div class="topline">
+  <span class="eyebrow">ЧЫГАРМАДАГЫ ОБРАЗДАР</span>
+  <span class="tag">05 / 07</span>
+ </div>
+ <h2 class="reveal">Башкы <span class="gold">каармандар</span></h2>
+ <div class="layout">
+  <div class="reveal delay1">
+   <div class="character">
+    <div class="symbol">01</div>
+    <div>
+     <h3>Кемчонтой</h3>
+     <p>Башкы каарман. Акылсыздыгы жана орунсуз жоруктары аркылуу сындалат.</p>
+    </div>
+   </div>
+   <div class="character">
+    <div class="symbol">02</div>
+    <div>
+     <h3>Багдагүл</h3>
+     <p>Кемчонтойдун аялы. Акылдуу, чыдамкай болуп, аны оңдоого аракет кылат.</p>
+    </div>
+   </div>
+   <div class="character">
+    <div class="symbol">03</div>
+    <div>
+     <h3>Кемчонтойдун энеси</h3>
+     <p>Уулунун абалын ойлоп, анын турмушун оңдоого аракеттенет.</p>
+    </div>
+   </div>
+   <div class="character">
+    <div class="symbol">04</div>
+    <div>
+     <h3>Баңгадул</h3>
+     <p>Поэмадагы башкы каармандардын бири катары адабий булактарда аталат.</p>
+    </div>
+   </div>
+  </div>
+  <div class="reveal delay2">
+   <img class="photo" style="height:380px" src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=900" alt="Кыргызстандын жаратылышы">
+   <div class="caption">КААРМАНДАРДЫН ОБРАЗДАРЫ</div>
+  </div>
+ </div>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+ <div class="topline">
+  <span class="eyebrow">НЕГИЗГИ ОЙ</span>
+  <span class="tag">06 / 07</span>
+ </div>
+ <h2 class="reveal">Чыгарманын <span class="gold">идеясы</span></h2>
+ <p class="reveal delay1">Автор Кемчонтойдун образы аркылуу адамдагы терс сапаттарды көрсөтүп, окурманга сабак берет.</p>
+ <div class="cards">
+  <div class="card reveal delay1">
+   <div class="num">✦</div>
+   <h3>Акылдуулук</h3>
+   <p>Ар бир ишти ойлонуп, туура чечим кабыл алуу керек.</p>
+  </div>
+  <div class="card reveal delay2">
+   <div class="num">✦</div>
+   <h3>Жоопкерчилик</h3>
+   <p>Өз иш-аракетиңе жооп берип, милдетиңди аткаруу зарыл.</p>
+  </div>
+  <div class="card reveal delay3">
+   <div class="num">✦</div>
+   <h3>Адептүүлүк</h3>
+   <p>Башкаларды сыйлап, жакшы мамиле жасоо маанилүү.</p>
+  </div>
+ </div>
+ <div class="textbox reveal delay4" style="margin-top:25px">
+  <div class="bigquote">Чыгарманын негизги сабагы — акылдуу, эмгекчил жана адептүү адам болуу.</div>
+ </div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+ <div class="final">
+  <div class="eyebrow reveal">ЖЫЙЫНТЫК</div>
+  <h2 class="reveal delay1">ЭМНЕ <span class="gold">ҮЙРӨНДҮК?</span></h2>
+  <p class="reveal delay2">«Кемчонтой» поэмасы бизге адамдын акылы, тарбиясы жана жүрүм-туруму канчалык маанилүү экенин түшүндүрөт.</p>
+  <p class="reveal delay3">Тоголок Молдо күлкү аркылуу жаман сапаттарды ашкерелеп, жакшы адам болууга чакырган.</p>
+  <div class="tag reveal delay3">АКЫЛ</div>
+  <div class="tag reveal delay3">АДЕП</div>
+  <div class="tag reveal delay3">ТАРБИЯ</div>
+  <div class="thanks reveal delay4">КӨҢҮЛ БУРГАНЫҢЫЗДАРГА РАХМАТ!</div>
+ </div>
+</section>
+
+<div class="hint">← → KEYBOARD CONTROL</div>
+<div class="nav">
+ <span class="counter" id="counter">01 / 07</span>
+ <div class="track"><div class="fill" id="fill"></div></div>
+ <div class="controls">
+  <button onclick="prev()">←</button>
+  <button onclick="next()">→</button>
+ </div>
+</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const fill=document.getElementById('fill');
+const counter=document.getElementById('counter');
+let current=0;
+
+function show(n){
+ current=Math.max(0,Math.min(n,slides.length-1));
+ slides.forEach((s,i)=>{
+  s.classList.remove('active');
+  if(i===current){
+   void s.offsetWidth;
+   s.classList.add('active');
+  }
+ });
+ fill.style.width=((current+1)/slides.length*100)+'%';
+ counter.textContent=String(current+1).padStart(2,'0')+' / 07';
+}
+function next(){show(current+1)}
+function prev(){show(current-1)}
+
+document.addEventListener('keydown',e=>{
+ if(e.key==='ArrowRight'||e.key===' '){
+  e.preventDefault();next();
+ }
+ if(e.key==='ArrowLeft')prev();
+ if(e.key==='Home')show(0);
+ if(e.key==='End')show(6);
+});
+
+let startX=0;
+document.addEventListener('touchstart',e=>{
+ startX=e.touches[0].clientX;
+});
+document.addEventListener('touchend',e=>{
+ const dx=e.changedTouches[0].clientX-startX;
+ if(Math.abs(dx)>65)dx<0?next():prev();
+});
+show(0);
+</script>
+</body>
+</html>
